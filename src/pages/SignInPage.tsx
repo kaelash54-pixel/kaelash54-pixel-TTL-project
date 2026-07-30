@@ -5,15 +5,13 @@ import { navigate } from '@/lib/nav';
 import { StatusBar } from '@/components/StatusBar';
 
 export function SignInPage() {
-  const { session } = useAuth();
+  const { session, user, profile, signOut } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [step, setStep] = useState<'email' | 'password'>('email');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [mode, setMode] = useState<'signup' | 'signin'>('signup');
-
-  if (session) { navigate('home'); return null; }
 
   const handleContinue = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +36,20 @@ export function SignInPage() {
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <StatusBar />
+      {session && (
+        <div className="mx-5 mt-2 flex items-center justify-between rounded-xl bg-gray-100 px-4 py-3">
+          <div className="min-w-0">
+            <p className="text-xs text-gray-400">Signed in as</p>
+            <p className="truncate text-sm font-semibold text-black">{profile?.display_name || user?.email}</p>
+          </div>
+          <button
+            onClick={async () => { await signOut(); setMode('signin'); setStep('email'); setError(''); setEmail(''); setPassword(''); }}
+            className="shrink-0 text-xs font-semibold text-black border border-black rounded-full px-3 py-1.5"
+          >
+            Sign Out
+          </button>
+        </div>
+      )}
       <div className="flex flex-1 flex-col items-center px-8 pt-14">
         <div className="mb-10 text-center">
           <h1 className="text-2xl font-bold text-black tracking-tight">Volunteer Exchange</h1>
