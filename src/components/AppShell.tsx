@@ -8,6 +8,7 @@ import { SignInPage } from '@/pages/SignInPage';
 import { ChatPage } from '@/pages/ChatPage';
 import { ActivityPage } from '@/pages/ActivityPage';
 import { FeedPage } from '@/pages/FeedPage';
+import { CreateOpportunityPage } from '@/pages/CreateOpportunityPage';
 
 export function AppShell() {
   const { loading } = useAuth();
@@ -33,6 +34,7 @@ export function AppShell() {
       {page === 'chat' && <ChatPage />}
       {page === 'activity' && <ActivityPage />}
       {page === 'feed' && <FeedPage />}
+      {page === 'create' && <CreateOpportunityPage />}
     </div>
   );
 }

@@ -11,7 +11,7 @@ export function BottomNav({ hasNotification }: BottomNavProps) {
   const items: { id: string; icon: typeof Home; badge?: boolean }[] = [
     { id: 'home',        icon: Home },
     { id: 'map',         icon: Map },
-    { id: 'feed',        icon: PlusCircle },
+    { id: 'create',      icon: PlusCircle },
     { id: 'activity',    icon: Bell, badge: hasNotification },
     { id: 'progression', icon: User },
   ];

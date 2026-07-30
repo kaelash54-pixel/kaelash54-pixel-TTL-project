@@ -113,6 +113,34 @@ export function HomePage() {
         </div>
       </div>
 
+      {/* Post opportunity CTA */}
+      <div className="mt-4 px-5">
+        <button
+          onClick={() => navigate('create')}
+          className="w-full flex items-center justify-between bg-black text-white rounded-2xl px-5 py-4 active:scale-[0.99] transition-transform"
+        >
+          <div className="text-left">
+            <p className="text-sm font-bold">Post an Opportunity</p>
+            <p className="text-xs text-white/60">Share a volunteer role for others to join</p>
+          </div>
+          <ChevronRight size={20} className="text-white/60" />
+        </button>
+      </div>
+
+      {/* Community feed link */}
+      <div className="mt-3 px-5">
+        <button
+          onClick={() => navigate('feed')}
+          className="w-full flex items-center justify-between border border-gray-200 rounded-2xl px-5 py-4 active:scale-[0.99] transition-transform"
+        >
+          <div className="text-left">
+            <p className="text-sm font-bold text-black">Community Feed</p>
+            <p className="text-xs text-gray-400">See what other volunteers are sharing</p>
+          </div>
+          <ChevronRight size={20} className="text-gray-300" />
+        </button>
+      </div>
+
       {/* Opportunity cards */}
       <div className="mt-3 space-y-3 px-5">
         {loading ? (

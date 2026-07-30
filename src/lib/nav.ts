@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-type Page = 'home' | 'map' | 'progression' | 'signin' | 'chat' | 'activity' | 'feed';
+type Page = 'home' | 'map' | 'progression' | 'signin' | 'chat' | 'activity' | 'feed' | 'create';
 
 interface NavState {
   page: Page;
