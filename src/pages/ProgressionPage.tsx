@@ -4,10 +4,11 @@ import { useAuth } from '@/context/AuthContext';
 import { VolunteerSession } from '@/lib/types';
 import { StatusBar } from '@/components/StatusBar';
 import { BottomNav } from '@/components/BottomNav';
-import { Menu, ChevronRight } from 'lucide-react';
+import { navigate } from '@/lib/nav';
+import { Menu, ChevronRight, LogOut, LogIn } from 'lucide-react';
 
 export function ProgressionPage() {
-  const { user, profile } = useAuth();
+  const { user, profile, signOut } = useAuth();
   const [sessions, setSessions] = useState<VolunteerSession[]>([]);
   const [tab, setTab] = useState(0);
 
@@ -44,7 +45,7 @@ export function ProgressionPage() {
     return `${fmt(d)} - ${fmt(end)}`;
   }
 
-  const initials = (profile?.display_name || 'U').split(' ').map(s => s[0]).slice(0, 2).join('').toUpperCase();
+  const initials = (profile?.display_name || (user ? (user.email?.[0] ?? 'G') : 'G')).split(' ').map(s => s[0]).slice(0, 2).join('').toUpperCase();
 
   return (
     <div className="min-h-screen bg-white pb-24">
@@ -104,6 +105,25 @@ export function ProgressionPage() {
             areas.map((a, i) => <AreaRow key={i} name={a} email="xyz@gmail.com" />)
           )}
         </div>
+      </div>
+
+      {/* Auth section */}
+      <div className="mt-6 px-5">
+        {user ? (
+          <button
+            onClick={() => signOut()}
+            className="w-full flex items-center justify-center gap-2 border border-gray-200 rounded-2xl py-3.5 text-sm font-semibold text-black active:scale-[0.99] transition-transform"
+          >
+            <LogOut size={18} /> Sign Out
+          </button>
+        ) : (
+          <button
+            onClick={() => navigate('signin')}
+            className="w-full flex items-center justify-center gap-2 bg-black text-white rounded-2xl py-3.5 text-sm font-semibold active:scale-[0.99] transition-transform"
+          >
+            <LogIn size={18} /> Sign In to Track Your Hours
+          </button>
+        )}
       </div>
 
       <BottomNav />
